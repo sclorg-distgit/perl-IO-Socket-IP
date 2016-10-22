@@ -1,8 +1,8 @@
 %{?scl:%scl_package perl-IO-Socket-IP}
 
 Name:           %{?scl_prefix}perl-IO-Socket-IP
-Version:        0.37
-Release:        368%{?dist}
+Version:        0.38
+Release:        1%{?dist}
 Summary:        Drop-in replacement for IO::Socket::INET supporting both IPv4 and IPv6
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -67,6 +67,9 @@ rm -f t/21nonblocking-connect-internet.t
 %{_mandir}/man3/*
 
 %changelog
+* Mon Aug 22 2016 Jitka Plesnikova <jplesnik@redhat.com> - 0.38-1
+- 0.38 bump
+
 * Tue Jul 12 2016 Petr Pisar <ppisar@redhat.com> - 0.37-368
 - SCL
 
