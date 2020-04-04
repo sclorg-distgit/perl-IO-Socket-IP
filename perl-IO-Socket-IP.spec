@@ -9,7 +9,7 @@
 
 Name:           %{?scl_prefix}perl-IO-Socket-IP
 Version:        0.39
-Release:        451%{?dist}
+Release:        452%{?dist}
 Summary:        Drop-in replacement for IO::Socket::INET supporting both IPv4 and IPv6
 License:        GPL+ or Artistic
 URL:            https://metacpan.org/release/IO-Socket-IP
@@ -21,6 +21,7 @@ BuildRequires:  findutils
 BuildRequires:  make
 BuildRequires:  %{?scl_prefix}perl-interpreter
 BuildRequires:  %{?scl_prefix}perl-generators
+BuildRequires:  %{?scl_prefix}perl(Config)
 BuildRequires:  %{?scl_prefix}perl(ExtUtils::MakeMaker)
 # Runtime
 BuildRequires:  %{?scl_prefix}perl(base)
@@ -52,6 +53,7 @@ arguments and methods are provided in a backward-compatible way.
 %prep
 %setup -q -n IO-Socket-IP-%{version}
 chmod -x lib/IO/Socket/IP.pm
+%{?scl:scl enable %{scl} '}perl -MConfig -i -pe %{?scl:'"}'%{?scl:"'}s{^#!/usr/bin/perl}{$Config{startperl}}%{?scl:'"}'%{?scl:"'} examples/*%{?scl:'}
 
 %build
 %{?scl:scl enable %{scl} '}perl Makefile.PL INSTALLDIRS=vendor && make %{?_smp_mflags}%{?scl:'}
@@ -73,6 +75,9 @@ rm -f t/21nonblocking-connect-internet.t
 %{_mandir}/man3/*
 
 %changelog
+* Thu Mar 26 2020 Petr Pisar <ppisar@redhat.com> - 0.39-452
+- Normalize the shebangs (bug #1817335)
+
 * Fri Dec 20 2019 Jitka Plesnikova <jplesnik@redhat.com> - 0.39-451
 - SCL
 
